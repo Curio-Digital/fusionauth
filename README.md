@@ -1,8 +1,4 @@
-# Finsweet Developer Starter
-
-A starter template for both Client & Power projects.
-
-Before starting to work with this template, please take some time to read through the documentation.
+# FusionAuth
 
 ## Reference
 
@@ -41,17 +37,13 @@ This template requires the use of [pnpm](https://pnpm.js.org/en/). You can [inst
 npm i -g pnpm
 ```
 
-To enable automatic deployments to npm, please read the [Continuous Deployment](#continuous-deployment) section.
-
 ## Getting started
 
-The quickest way to start developing a new project is by [creating a new repository from this template](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template).
-
-Once the new repository has been created, update the `package.json` file with the correct information, specially the name of the package which has to be unique.
+The quickest way to start developing a new script is by [cloing this repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template).
 
 ### Installing
 
-After creating the new repository, open it in your terminal and install the packages by running:
+After cloning this repository, open it in your terminal and install the packages by running:
 
 ```bash
 pnpm install
@@ -243,7 +235,6 @@ As mentioned before, Changesets will automatically deploy the new package versio
 
 This npm token should be:
 
-- From Finsweet's npm organization if this repository is meant for internal/product development.
 - From a client's npm organization if this repository is meant for client development. In this case, you should ask the client to [create an npm account](https://www.npmjs.com/signup) and provide you the credentials (or the npm token, if they know how to get it).
 
 Once you're logged into the npm account, you can get an access token by following [this guide](https://docs.npmjs.com/creating-and-viewing-access-tokens).
