@@ -1,6 +1,6 @@
 {
   "name": "@curiolabs/fusionauth",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "FusionAuth Webflow integration",
   "homepage": "https://github.com/Curio-Digital/fusionauth#readme",
   "license": "ISC",
