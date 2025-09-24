@@ -59,6 +59,10 @@ const isMatch = (el: HTMLElement | null, q: string): boolean => {
   return normalizeText(el.textContent || '').includes(q);
 };
 
+const itemMatchesQuery = (els: FaqItemElements, q: string): boolean => {
+  return isMatch(els.questionTitle, q) || isMatch(els.answer, q);
+};
+
 const clearHighlights = (container: HTMLElement): void => {
   const marks = Array.from(container.querySelectorAll(`${HIGHLIGHT_TAG}.${HIGHLIGHT_CLASS}`));
   marks.forEach((mark) => {
@@ -140,6 +144,8 @@ const highlightMatchesInElement = (container: HTMLElement, query: string): void 
 
 const openFaqItem = (els: FaqItemElements): void => {
   if (!els.questionWrapper) return;
+  // Avoid toggling closed if we already opened this via search
+  if (els.item.getAttribute(OPENED_ATTR) === 'true') return;
   // Simulate user click to trigger Webflow interaction
   els.questionWrapper.click();
   els.item.setAttribute(OPENED_ATTR, 'true');
@@ -221,6 +227,18 @@ const attachSearchHandlerToInput = (input: HTMLInputElement, items: FaqItemEleme
       });
       return;
     }
+    const q = normalizeText(value);
+    // For non-empty queries, close only those previously search-opened items
+    // that no longer match the current query. Keep matching items open.
+    items.forEach((els) => {
+      if (searchOpenedItems.has(els.item) && !itemMatchesQuery(els, q)) {
+        if (isFaqItemOpen(els) && els.questionWrapper) {
+          els.questionWrapper.click();
+        }
+        els.item.removeAttribute(OPENED_ATTR);
+        searchOpenedItems.delete(els.item);
+      }
+    });
     findFirstMatchAndAct(items, value);
   };
 
@@ -235,7 +253,6 @@ const attachSearchHandlerToInput = (input: HTMLInputElement, items: FaqItemEleme
   });
 
   input.addEventListener('input', onSearchDebounced);
-  input.addEventListener('change', onSearch);
 };
 
 const init = (): void => {
