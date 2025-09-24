@@ -9,7 +9,7 @@ const BUILD_DIRECTORY = 'dist';
 const PRODUCTION = process.env.NODE_ENV === 'production';
 
 // Config entrypoint files
-const ENTRY_POINTS = ['src/buildvsbuy/index.ts', 'src/home/test.ts'];
+const ENTRY_POINTS = ['src/buildvsbuy/index.ts', 'src/faq/index.ts'];
 
 // Config dev serving
 const LIVE_RELOAD = !PRODUCTION;
